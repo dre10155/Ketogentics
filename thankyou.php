@@ -87,31 +87,6 @@ $(document).ready(function(){
 
 </script>
 
-<?php
-// Check if the form is submitted 
 
-if ( isset( $_GET['submit'] ) )
- { 
-    $email = $_GET['email'];
-    $date = $_GET['date'];
-    $card_number = $_GET['card_number'];
-    $cvv = $_GET['cvv'];
-    $firstname = $_GET['firstname'];
-    $lastname = $_GET['lastname'];
-    $address = $_GET['address'];
-    $country = $_GET['country'];
-    $city = $_GET['city'];
-    $zip = $_GET['zip'];
-    $phone = $_GET['phone'];
-    
-};
-echo $firstname; 
-echo $lastname;
-?>
-
-
-<?php
-
-?>
 </body>
 </html>

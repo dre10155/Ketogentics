@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <p class="chk-frm-hd"><img src="images/frm-hd-arw.png" alt="" class="frm-hd-arw">Checkout & Download Now</p>
-                <form action="thankyou.php">
+                <form action="validator.php">
                     <div class="frm-container">
                         <div class="frm-bx">
                             <p class="frm-bx-hd"><img src="images/frm-bx-hd-img1.png" alt="" class="frm-bx-hd-img">E-Book Delivery Email</p>
