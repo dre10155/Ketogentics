@@ -280,6 +280,8 @@ table.odr-sum-info tr:last-child td{
 	background:url(../images/sel-opt.png) 97% center no-repeat;
 	padding-left:10px;
 }
+ 
+
 .inp-field input[type='text'], .inp-field-sel select, .inp-field input[type='tel']{
 	-webkit-appearance:none;
 	border:none;

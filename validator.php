@@ -1,36 +1,38 @@
 <?php
-// Check if the form is submitted 
-$valid = false;
-// if ( isset( $_GET['submit'] ) )
-//  { 
-//     $email = $_GET['email'];
-//     $date = $_GET['date'];
-//     $card_number = $_GET['card_number'];
-//     $cvv = $_GET['cvv'];
-//     $firstname = $_GET['firstname'];
-//     $lastname = $_GET['lastname'];
-//     $address = $_GET['address'];
-//     $country = $_GET['country'];
-//     $city = $_GET['city'];
-//     $zip = $_GET['zip'];
-//     $phone = $_GET['phone'];
 
-//     // if($valid){
-//     //     header("Location: thankyou.php");
-//     //     exit();
-//     // }
-    
-// };
-// echo $firstname; 
-// echo $lastname;
+// Import PHPMailer classes into the global namespace
+// These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
+// Load Composer's autoloader
+require 'vendor/autoload.php';
 
+// Instantiation and passing `true` enables exceptions
+$mail = new PHPMailer(true);
 
 ##
 ## Example php -q TestPurchase.php store1
 ##
 require "mpgClasses.php";
-/**************************** Request Variables *******************************/
+
+
+//Transition to thankyou.php is transaction is complete and send email with pdf attachment 
+if ( isset( $_POST['submit'] ) )
+ {  $email = $_POST['email'];
+    $date = $_POST['date'];
+    $card_number = $_POST['card_number'];
+    $cvv = $_POST['cvv'];
+    $firstname = $_POST['firstname'];
+    $lastname = $_POST['lastname'];
+    $address = $_POST['address'];
+    $country = $_POST['country'];
+    $city = $_POST['city'];
+    $zip = $_POST['zip'];
+    $phone = $_POST['phone'];
+
+    /**************************** Request Variables *******************************/
 $store_id='store5';
 $api_token='yesguy';
 /************************* Transactional Variables ****************************/
@@ -38,8 +40,8 @@ $type='purchase';
 $cust_id='cust id';
 $order_id='ord-'.date("dmy-G:i:s");
 $amount='100.00';
-$pan='5454545442424242';
-$expiry_date='2020';
+$pan=$card_number;
+$expiry_date=$date;
 $crypt='7';
 $dynamic_descriptor='123';
 $status_check = 'true';
@@ -66,7 +68,14 @@ $cof->setIssuerId("168451306048014");
 $mpgTxn->setCofInfo($cof);
 /****************************** Request Object *******************************/
 $mpgRequest = new mpgRequest($mpgTxn);
-$mpgRequest->setProcCountryCode("CA"); //"US" for sending transaction to US environment
+if($country == "CA"){
+    $mpgRequest->setProcCountryCode("CA"); //"CA" for sending transaction to CA environment
+}
+else{
+    $mpgRequest->setProcCountryCode("US"); //"US" for sending transaction to US environment
+
+}
+
 $mpgRequest->setTestMode(true); //false or comment out this line for production transactions
 /***************************** HTTPS Post Object *****************************/
 /* Status Check Example
@@ -97,7 +106,45 @@ print("\nHostId = " . $mpgResponse->getHostId());
 print("\nIssuerId = " . $mpgResponse->getIssuerId());
 
 
-                
+    if($mpgResponse->getComplete()=="true"){
+        try {
+            // //Server settings
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+            // $mail->isSMTP();                                            // Send using SMTP
+            // $mail->Host       = 'smtp1.example.com';                    // Set the SMTP server to send through
+            // $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            // $mail->Username   = 'user@example.com';                     // SMTP username
+            // $mail->Password   = 'secret';                               // SMTP password
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            // $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+        
+            //Recipients
+            $mail->setFrom('andreas_mendes@hotmail.com', 'Mailer');
+            $mail->addAddress('andreas.mendes94@gmail.com', 'Andreas mendes');     // Add a recipient
+            $mail->addAddress('deandremendes@gmail.com');               // Name is optional
+            $mail->addReplyTo('info@example.com', 'Information');
+            $mail->addCC('cc@example.com');
+            $mail->addBCC('bcc@example.com');
+        
+           
+            // Content
+            $mail->isHTML(true);                                  // Set email format to HTML
+            $mail->Subject = 'Here is the subject';
+            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+        
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+        echo "im alive";
+        // header("Location: thankyou.php");
+        // exit();
+    }
+    
+};
+
 
 
 ?>
