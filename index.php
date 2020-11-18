@@ -23,7 +23,7 @@
                     <div class="bar3"></div>
                 </button>
             </div>
-            <a href="#" class="menu-btn ignore-scroll show-desk show-tab">Download Now <img src="images/hdr-btnarw.png"></a>
+            <a href="checkout.php" class="menu-btn ignore-scroll show-desk show-tab">Download Now <img src="images/hdr-btnarw.png"></a>
             <ul class="menu-list show-desk scroller">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#overview">Overview</a></li>

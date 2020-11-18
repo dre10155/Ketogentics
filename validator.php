@@ -108,29 +108,29 @@ print("\nIssuerId = " . $mpgResponse->getIssuerId());
 
     if($mpgResponse->getComplete()=="true"){
         try {
-            // //Server settings
+            //Server settings
             // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
-            // $mail->isSMTP();                                            // Send using SMTP
-            // $mail->Host       = 'smtp1.example.com';                    // Set the SMTP server to send through
-            // $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-            // $mail->Username   = 'user@example.com';                     // SMTP username
-            // $mail->Password   = 'secret';                               // SMTP password
-            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-            // $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+            $mail->isSMTP();                                            // Send using SMTP
+            $mail->Host       = 'smtp.gmail.com';                    // Set the SMTP server to send through
+            $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+            $mail->Username   = 'andreas.mendes94@gmail.com';                     // SMTP username
+            $mail->Password   = 'Deandre1013!';                               // SMTP password
+            $mail->SMTPSecure = 'tls';         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+            $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
         
             //Recipients
-            $mail->setFrom('andreas_mendes@hotmail.com', 'Mailer');
-            $mail->addAddress('andreas.mendes94@gmail.com', 'Andreas mendes');     // Add a recipient
+            $mail->setFrom('andreas.mendes94@gmail.com', 'Ketogenics');
+            $mail->addAddress('andreas_mendes@hotmail.com', 'Andreas');     // Add a recipient
             $mail->addAddress('deandremendes@gmail.com');               // Name is optional
-            $mail->addReplyTo('info@example.com', 'Information');
-            $mail->addCC('cc@example.com');
-            $mail->addBCC('bcc@example.com');
-        
+            
+            // // Attachments
+            $mail->addAttachment('./assets/keto.pdf');         // Add attachments
            
+        
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+            $mail->Subject = 'Congratulations'  . $firstname  . " on your purchase of ketogentics";
+            $mail->Body    = 'Health is wealth you one <b>test email!</b>';
             $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
         
             $mail->send();
@@ -138,9 +138,10 @@ print("\nIssuerId = " . $mpgResponse->getIssuerId());
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
-        echo "im alive";
-        // header("Location: thankyou.php");
-        // exit();
+        header("Location: thankyou.php");
+        exit();
+    }else{
+        echo 'Error 404 : please try again';
     }
     
 };
