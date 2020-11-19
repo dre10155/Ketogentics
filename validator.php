@@ -33,13 +33,13 @@ if ( isset( $_POST['submit'] ) )
     $phone = $_POST['phone'];
 
     /**************************** Request Variables *******************************/
-$store_id='store5';
-$api_token='yesguy';
+$store_id='gwca039189';
+$api_token='Zo9bzqKYutjMflZb5UUw';
 /************************* Transactional Variables ****************************/
 $type='purchase';
 $cust_id='cust id';
 $order_id='ord-'.date("dmy-G:i:s");
-$amount='100.00';
+$amount='44.95';
 $pan=$card_number;
 $expiry_date=$date;
 $crypt='7';
@@ -145,6 +145,87 @@ print("\nIssuerId = " . $mpgResponse->getIssuerId());
     }
     
 };
+
+
+
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+$address = $_POST['address'];
+$country = $_POST['country'];
+$city = $_POST['city'];
+$zip = $_POST['zip'];
+$phone = $_POST['phone'];
+$email = $_POST['email'];
+$date = $_POST['date'];
+$card_number = $_POST['card_number'];
+$cvv = $_POST['cvv'];
+
+/*********************** Line Item Variables **************************/
+$item_name[0] = 'Keto Smart The Complete Guide';
+// $item_name[0] = 'Guy Lafleur Retro Jersey';
+$item_quantity[0] = '1';
+// $item_product_code[0] = 'JRSCDA344';
+$item_extended_amount[0] = '44.95';
+$item_quantity[1] = '1';
+$item_product_code[1] = 'JPREEA344';
+$item_extended_amount[1] = '44.95';
+/******************** Customer Information Object *********************/
+$mpgCustInfo = new mpgCustInfo();
+/********************** Set Customer Information **********************/
+$billing = array(
+				 'first_name' => $first_name,
+                 'last_name' => $last_name,
+                 'address' => $address,
+                 'city' => $city,
+                 'province' => $province,
+                 'postal_code' => $zip,
+                 'country' => $country,
+                 
+                 
+                 );
+$mpgCustInfo->setBilling($billing);
+$shipping = array(
+				 'first_name' => $first_name,
+                 'last_name' => $last_name,
+                 'address' => $address,
+                 'city' => $city,
+                 'province' => $province,
+                 'postal_code' => $zip,
+                 'country' => $country,
+             
+                 );
+$mpgCustInfo->setShipping($shipping);
+$mpgCustInfo->setEmail($email);
+$mpgCustInfo->setInstructions($instructions);
+/*********************** Set Line Item Information *********************/
+$item[0] = array(
+			   'name'=>$item_name[0],
+               'quantity'=>$item_quantity[0],
+               'product_code'=>$item_product_code[0],
+               'extended_amount'=>$item_extended_amount[0]
+               );
+$item[1] = array(
+			   'name'=>$item_name[1],
+               'quantity'=>$item_quantity[1],
+               'product_code'=>$item_product_code[1],
+               'extended_amount'=>$item_extended_amount[1]
+               );
+$mpgCustInfo->setItems($item[0]);
+$mpgCustInfo->setItems($item[1]);
+/***************** Transactional Associative Array ********************/
+$txnArray=array(
+				'type'=>$type,
+		        'order_id'=>$order_id,
+		        'cust_id'=>$cust_id,
+		        'amount'=>$amount,
+		        'pan'=>$pan,
+		        'expdate'=>$expiry_date,
+		        'crypt_type'=>$crypt
+	           );
+/********************** Transaction Object ****************************/
+$mpgTxn = new mpgTransaction($txnArray);
+/******************** Set Customer Information ************************/
+$mpgTxn->setCustInfo($mpgCustInfo);
 
 
 
