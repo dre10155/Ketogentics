@@ -5,7 +5,7 @@ if(isset($_POST["country"])){
      
     // Define country and city array
     $countryArr = array(
-		"usa" => array(
+		"US" => array(
 		
 			 '' => 'Select State',
 
@@ -117,7 +117,7 @@ if(isset($_POST["country"])){
 
 		
 		),
-		"ca" => array(
+		"CA" => array(
 		
 			''      =>  'Select Province',
 

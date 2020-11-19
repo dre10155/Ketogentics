@@ -5,12 +5,10 @@
 <title>Keto Smart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-
 <link rel="stylesheet" type="text/css" href="css/inner.css">
 <link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css">
 <link rel="stylesheet" type="text/css" href="fonts/fonts.css">
 </head>
-
 <body>
 	<div class="chk-top">
     	<div class="container">
@@ -71,7 +69,7 @@
                     </div>
                 </div>
                 <p class="chk-frm-hd"><img src="images/frm-hd-arw.png" alt="" class="frm-hd-arw">Checkout & Download Now</p>
-                <form action="validator.php">
+                <form method="post" action="validator.php">
                     <div class="frm-container">
                         <div class="frm-bx">
                             <p class="frm-bx-hd"><img src="images/frm-bx-hd-img1.png" alt="" class="frm-bx-hd-img">E-Book Delivery Email</p>
@@ -85,10 +83,11 @@
                             <img src="images/cards.png" alt="" class="cards">
                             <div class="clearall"></div>
                             <div class="inp-field full fl">
-                            	<input name="card_number" type="tel" placeholder="Card number" id="ccnum">
+                            	<input name="card_number" maxlength="16"onkeypress="return isNumberKey(event)" type="tel" placeholder="Card number" id="ccnum">
                             </div>
                             <div class="inp-field half fl">
-                                <input name="date" type="tel"  id="" placeholder="Exp.  MM/YY" onkeyup="formatString(event);" maxlength="5">
+                                <input name="date" type="tel" onkeypress="return isNumberKey(event)" id="" placeholder="Exp.  YYMM"  maxlength="4">
+                                
                             </div>
                             <div class="inp-field half fr">
                                 <input name="cvv" type="tel"  id="" placeholder="CVV" onkeypress="return isNumberKey(event)" maxlength="3">
@@ -109,8 +108,8 @@
                             </div>
                             <div class="inp-field-sel half fl">
                                 <select name="country" id="" class="country">
-                                    <option value="usa">United States</option>
-                    				<option value="ca">Canada</option>
+                                    <option value="US">United States</option>
+                    				<option value="CA">Canada</option>
                                 </select>
                             </div>
                             <div class="inp-field-sel half fr" id="response">
@@ -177,30 +176,6 @@ $(document).ready(function(){
 });
 
 
-function formatString(e) {
-	var inputChar = String.fromCharCode(event.keyCode);
-	var code = event.keyCode;
-	var allowedKeys = [8];
-	if (allowedKeys.indexOf(code) !== -1) {
-		return;
-	}
-	
-	event.target.value = event.target.value.replace(
-	/^([1-9]\/|[2-9])$/g, '0$1/' // 3 > 03/
-	).replace(
-	/^(0[1-9]|1[0-2])$/g, '$1/' // 11 > 11/
-	).replace(
-	/^([0-1])([3-9])$/g, '0$1/$2' // 13 > 01/3
-	).replace(
-	/^(0?[1-9]|1[0-2])([0-9]{2})$/g, '$1/$2' // 141 > 01/41
-	).replace(
-	/^([0]+)\/|[0]+$/g, '0' // 0/ > 0 and 00 > 0
-	).replace(
-	/[^\d\/]|^[\/]*$/g, '' // To allow only digits and `/`
-	).replace(
-	/\/\//g, '/' // Prevent entering more than 1 `/`
-	);
-}
 	
 <!--
 function isNumberKey(evt)
@@ -224,18 +199,18 @@ function onChangeTxtCardNumber(e) {
     var formattedCardNumber = cardNumber.replace(/[^\d]/g, "");
     formattedCardNumber = formattedCardNumber.substring(0, 16);
   
-    // Split the card number is groups of 4
-    var cardNumberSections = formattedCardNumber.match(/\d{1,4}/g);
-    if (cardNumberSections !== null) {
-        formattedCardNumber = cardNumberSections.join(' ');	
-    }
+    // // Split the card number is groups of 4
+    // var cardNumberSections = formattedCardNumber.match(/\d{1,4}/g);
+    // if (cardNumberSections !== null) {
+    //     formattedCardNumber = cardNumberSections.join(' ');	
+    // }
 	
-    console.log("'"+ cardNumber + "' to '" + formattedCardNumber + "'");
+    // console.log("'"+ cardNumber + "' to '" + formattedCardNumber + "'");
   
-    // If the formmattedCardNumber is different to what is shown, change the value
-    if (cardNumber !== formattedCardNumber) {
-        txtCardNumber.value = formattedCardNumber;
-    }
+    // // If the formmattedCardNumber is different to what is shown, change the value
+    // if (cardNumber !== formattedCardNumber) {
+    //     txtCardNumber.value = formattedCardNumber;
+    // }
 }
 
 </script>
