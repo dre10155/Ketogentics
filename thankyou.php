@@ -48,7 +48,7 @@
                 	<img src="images/thank-prd1.png" alt="" class="thank-prd hide-mob">
                     <div class="thank-prd-info">
                     	<p class="thnk-prd-nm"><img src="images/thank-prd1.png" alt="" class="thank-prd show-mob"> Keto Smart Guide<br> <span>Achieve Ketogenic<br class="show-mob"> Success</span></p>
-                        <a href="#" class="thank-btn">Download Smart Keto Guide <img src="images/download-icn.png" alt=""></a>
+                        <a href="./assets/keto.pdf" download class="thank-btn">Download Smart Keto Guide <img src="images/download-icn.png" alt=""></a>
                     </div>
                 </div>
                 
@@ -58,7 +58,7 @@
                 	<img src="images/thank-prd2.png" alt="" class="thank-prd hide-mob">
                     <div class="thank-prd-info">
                     	<p class="thnk-prd-nm"><img src="images/thank-prd2.png" alt="" class="thank-prd show-mob">Keto Smart Recipes<br> <span>25 Top Rated<br class="show-mob"> Keto Recipes</span></p>
-                        <a href="#" class="thank-btn">Download Smart Recipe Book <img src="images/download-icn.png" alt=""></a>
+                        <a href="./assets/keto.pdf" download class="thank-btn">Download Smart Recipe Book <img src="images/download-icn.png" alt=""></a>
                     </div>
                 </div>
             </div>
