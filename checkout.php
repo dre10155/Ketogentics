@@ -206,7 +206,7 @@
                     <input  type="text" name="city" id="" placeholder="City">
                 </div>
                 <div v-if="country === 'CA'" class="inp-field half fr">
-                    <input  type="tel" name="zip" maxlength="6" id="" placeholder="Postal Code" onkeypress="">
+                    <input  type="text" name="zip" maxlength="6" id="" placeholder="Postal Code" onkeypress="">
                 </div>
                 <div v-else class="inp-field half fr">
                     <input  type="tel" name="zip"  maxlength="5" id="" placeholder="Zip Code" onkeypress="return isNumberKey(event)">

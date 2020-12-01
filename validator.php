@@ -43,17 +43,17 @@ if ( isset( $_POST['submit'] ) )
     $shipping_cost = '0';
 
     /**************************** Request Variables *******************************/
-    // $store_id='gwca039189';
-    // $api_token='Zo9bzqKYutjMflZb5UUw';
-    $store_id='store5';
-    $api_token='yesguy';
+    $store_id='gwca039189';
+    $api_token='Zo9bzqKYutjMflZb5UUw';
+    // $store_id='store5';
+    // $api_token='yesguy';
 
 
 /************************* Transactional Variables ****************************/
 $type='purchase';
 $cust_id= $first_name.rand(1000, 999999);
 $order_id= rand(1000000000, 9999999999);
-$amount='5.00';
+$amount='44.95';
 $pan=$card_number;
 $expiry_date=$date;
 $crypt='7';
@@ -140,7 +140,7 @@ else{
 
 }
 
-$mpgRequest->setTestMode(true); //false or comment out this line for production transactions
+$mpgRequest->setTestMode(false); //false or comment out this line for production transactions
 /***************************** HTTPS Post Object *****************************/
 /* Status Check Example
 $mpgHttpPost  =new mpgHttpsPostStatus($store_id,$api_token,$status_check,$mpgRequest);
@@ -148,30 +148,26 @@ $mpgHttpPost  =new mpgHttpsPostStatus($store_id,$api_token,$status_check,$mpgReq
 $mpgHttpPost = new mpgHttpsPost($store_id,$api_token,$mpgRequest);
 /******************************* Response ************************************/
 $mpgResponse=$mpgHttpPost->getMpgResponse();
-print("\nCardType = " . $mpgResponse->getCardType());
-print("\nTransAmount = " . $mpgResponse->getTransAmount());
-print("\nTxnNumber = " . $mpgResponse->getTxnNumber());
-print("\nReceiptId = " . $mpgResponse->getReceiptId());
-print("\nTransType = " . $mpgResponse->getTransType());
-print("\nReferenceNum = " . $mpgResponse->getReferenceNum());
-print("\nResponseCode = " . $mpgResponse->getResponseCode());
-print("\nISO = " . $mpgResponse->getISO());
-print("\nMessage = " . $mpgResponse->getMessage());
-print("\nIsVisaDebit = " . $mpgResponse->getIsVisaDebit());
-print("\nAuthCode = " . $mpgResponse->getAuthCode());
-print("\nComplete = " . $mpgResponse->getComplete());
-print("\nTransDate = " . $mpgResponse->getTransDate());
-print("\nTransTime = " . $mpgResponse->getTransTime());
-print("\nTicket = " . $mpgResponse->getTicket());
-print("\nTimedOut = " . $mpgResponse->getTimedOut());
-print("\nStatusCode = " . $mpgResponse->getStatusCode());
-print("\nStatusMessage = " . $mpgResponse->getStatusMessage());
-print("\nHostId = " . $mpgResponse->getHostId());
-print("\nIssuerId = " . $mpgResponse->getIssuerId());
-
-
-echo $order_id;
-echo $cust_id;
+// print("\nCardType = " . $mpgResponse->getCardType());
+// print("\nTransAmount = " . $mpgResponse->getTransAmount());
+// print("\nTxnNumber = " . $mpgResponse->getTxnNumber());
+// print("\nReceiptId = " . $mpgResponse->getReceiptId());
+// print("\nTransType = " . $mpgResponse->getTransType());
+// print("\nReferenceNum = " . $mpgResponse->getReferenceNum());
+// print("\nResponseCode = " . $mpgResponse->getResponseCode());
+// print("\nISO = " . $mpgResponse->getISO());
+// print("\nMessage = " . $mpgResponse->getMessage());
+// print("\nIsVisaDebit = " . $mpgResponse->getIsVisaDebit());
+// print("\nAuthCode = " . $mpgResponse->getAuthCode());
+// print("\nComplete = " . $mpgResponse->getComplete());
+// print("\nTransDate = " . $mpgResponse->getTransDate());
+// print("\nTransTime = " . $mpgResponse->getTransTime());
+// print("\nTicket = " . $mpgResponse->getTicket());
+// print("\nTimedOut = " . $mpgResponse->getTimedOut());
+// print("\nStatusCode = " . $mpgResponse->getStatusCode());
+// print("\nStatusMessage = " . $mpgResponse->getStatusMessage());
+// print("\nHostId = " . $mpgResponse->getHostId());
+// print("\nIssuerId = " . $mpgResponse->getIssuerId());
 
 
     if($mpgResponse->getComplete()=="true"){
@@ -187,22 +183,24 @@ echo $cust_id;
             $mail->Port       = 587;                                    // TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
         
             //Recipients
-            $mail->setFrom('support@ketogenicsmart.com', 'Ketogenics');
+            $mail->setFrom('support@ketogenicsmart.com', 'Keto Smart');
             $mail->addAddress($email, $first_name);     // Add a recipient
             $mail->addBCC('support@ketogenicsmart.com');
             
             // // Attachments
             $mail->addAttachment('./assets/Keto-Smart-Guide.pdf');         // Add attachments
             $mail->addAttachment('./assets/Keto-Smart-Recipe-Book.pdf'); 
-           
+        
          
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Subject = "Welcome to Keto Smart! Your eBooks are waiting for you! :)";
+            $mail->Subject = "Welcome to Keto Smart! Your digital products are waiting for you! :)";
             $mail->Body    = '<p>
             Hi ' .$first_name.  '
           </p>
-           <p> We at Keto Smart are happy that you have taken your first step towards   better health! We hope you find value in our Keto Smart Guide and take time to try some of the amazing recipes in the Keto Smart Recipe Book.Below, you will find the eBooks that are ready for download.        
+           <p> We at Keto Smart are happy that you have taken your first step towards   better health! We hope you find value in our Keto Smart Guide and take time to try some of the amazing recipes in the Keto Smart Recipe Book.
+           </p>
+           Below, you will find the digital products that are ready for download. Here is your order ID: ' .$order_id. '         
           </p>
           <p>
             We wish you all the best on your journey to a healthier lifestyle!           
