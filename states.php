@@ -156,7 +156,9 @@ if(isset($_POST["country"])){
         //echo "<label>State:</label>";
         echo "<select>";
         foreach($countryArr[$country] as $value){
-            echo "<option>". $value . "</option>";
+            echo "<option value=".$value.">";
+            echo $value;
+            echo "</option>";
         }
         echo "</select>";
     } 
